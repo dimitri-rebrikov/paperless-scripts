@@ -53,6 +53,11 @@ sudo "$EDITOR" /opt/paperless-scripts/.env     # set PAPERLESS_API_TOKEN
 `post_consume.py.lock` is optional but recommended: `uv run --script` reuses it, which keeps the
 dependency resolution reproducible.
 
+Deploy from a clone rather than by copying a Windows working file: the script is started through its
+shebang, and a `\r` on that line makes it unrunnable (`env: 'uv': No such file or directory`). Line
+endings are pinned to LF by `.gitattributes`; if a copy looks suspicious, check it with
+`file post_consume.py` and strip the CRs with `dos2unix post_consume.py`.
+
 ### Token
 
 My Profile -> circular arrow button (or `POST /api/token/`). The token's user needs permission to
